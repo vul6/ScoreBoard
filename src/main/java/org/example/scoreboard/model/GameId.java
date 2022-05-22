@@ -10,7 +10,7 @@ import lombok.Getter;
 @Builder
 @EqualsAndHashCode(callSuper = false)
 public final class GameId {
-    private final String home;
-    private final String away;
+    private final String homeTeam;
+    private final String awayTeam;
 
 }

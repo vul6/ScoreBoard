@@ -20,12 +20,12 @@ public class ScoreBoardServiceTest {
         //when
         unit.startGame(FRANCE, ENGLAND);
         //then
-        GameId gameId = GameId.builder().home(FRANCE).away(ENGLAND).build();
+        GameId gameId = GameId.builder().homeTeam(FRANCE).awayTeam(ENGLAND).build();
         assertEquals(1, unit.getScoreBoard().size());
-        assertEquals(FRANCE, unit.getScoreBoard().get(gameId).getHomeTeam().getTeamName());
-        assertEquals(ENGLAND, unit.getScoreBoard().get(gameId).getAwayTeam().getTeamName());
-        assertEquals(0, unit.getScoreBoard().get(gameId).getHomeTeam().getScore());
-        assertEquals(0, unit.getScoreBoard().get(gameId).getAwayTeam().getScore());
+        assertEquals(FRANCE, unit.getScoreBoard().get(gameId).getGameId().getHomeTeam());
+        assertEquals(ENGLAND, unit.getScoreBoard().get(gameId).getGameId().getAwayTeam());
+        assertEquals(0, unit.getScoreBoard().get(gameId).getHomeTeamScore());
+        assertEquals(0, unit.getScoreBoard().get(gameId).getAwayTeamScore());
     }
 
     @Test
@@ -65,12 +65,12 @@ public class ScoreBoardServiceTest {
         unit.startGame(FRANCE, ENGLAND);
         unit.updateScore(FRANCE, ENGLAND, 1, 0);
         //then
-        GameId gameId = GameId.builder().home(FRANCE).away(ENGLAND).build();
+        GameId gameId = GameId.builder().homeTeam(FRANCE).awayTeam(ENGLAND).build();
         assertEquals(1, unit.getScoreBoard().size());
-        assertEquals(FRANCE, unit.getScoreBoard().get(gameId).getHomeTeam().getTeamName());
-        assertEquals(ENGLAND, unit.getScoreBoard().get(gameId).getAwayTeam().getTeamName());
-        assertEquals(1, unit.getScoreBoard().get(gameId).getHomeTeam().getScore());
-        assertEquals(0, unit.getScoreBoard().get(gameId).getAwayTeam().getScore());
+        assertEquals(FRANCE, unit.getScoreBoard().get(gameId).getGameId().getHomeTeam());
+        assertEquals(ENGLAND, unit.getScoreBoard().get(gameId).getGameId().getAwayTeam());
+        assertEquals(1, unit.getScoreBoard().get(gameId).getHomeTeamScore());
+        assertEquals(0, unit.getScoreBoard().get(gameId).getAwayTeamScore());
     }
 
     @Test

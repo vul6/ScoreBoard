@@ -7,16 +7,16 @@ import java.util.Set;
 public class ValidatorService {
 
     public static void validateExistingTeams(GameId gameId, Set<GameId> gameIds) {
-        validateTeamNamesNotNullOrEmpty(gameId.getHome(), gameId.getAway());
+        validateTeamNamesNotNullOrEmpty(gameId.getHomeTeam(), gameId.getAwayTeam());
         if(!gameIds.contains(gameId)) {
             throw new IllegalArgumentException("Game with provided teams is not in play");
         }
     }
 
     public static void validateNewTeams(GameId gameId, Set<GameId> gameIds) {
-        validateTeamNamesNotNullOrEmpty(gameId.getHome(), gameId.getAway());
-        if (gameIds.stream().anyMatch(id -> id.getAway().equals(gameId.getAway()) || id.getAway().equals(gameId.getHome()) ||
-                id.getHome().equals(gameId.getAway()) || id.getHome().equals(gameId.getHome()))) {
+        validateTeamNamesNotNullOrEmpty(gameId.getHomeTeam(), gameId.getAwayTeam());
+        if (gameIds.stream().anyMatch(id -> id.getAwayTeam().equals(gameId.getAwayTeam()) || id.getAwayTeam().equals(gameId.getHomeTeam()) ||
+                id.getHomeTeam().equals(gameId.getAwayTeam()) || id.getHomeTeam().equals(gameId.getHomeTeam()))) {
             throw new IllegalArgumentException("At least one of provided teams is already involved in a different game");
         }
     }

@@ -10,10 +10,10 @@ public class GameConverter implements Function<Game, GameDto> {
     @Override
     public GameDto apply(Game game) {
         return GameDto.builder()
-                .homeTeam(game.getHomeTeam().getTeamName())
-                .homeTeamScore(game.getHomeTeam().getScore())
-                .awayTeam(game.getAwayTeam().getTeamName())
-                .awayTeamScore(game.getAwayTeam().getScore())
+                .homeTeam(game.getGameId().getHomeTeam())
+                .awayTeam(game.getGameId().getAwayTeam())
+                .homeTeamScore(game.getHomeTeamScore())
+                .awayTeamScore(game.getAwayTeamScore())
                 .build();
     }
 }
