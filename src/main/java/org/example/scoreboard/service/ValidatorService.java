@@ -1,9 +1,10 @@
 package org.example.scoreboard.service;
 
+import lombok.NoArgsConstructor;
 import org.example.scoreboard.model.GameId;
 
 import java.util.Set;
-
+@NoArgsConstructor
 public class ValidatorService {
 
     public static void validateExistingTeams(GameId gameId, Set<GameId> gameIds) {

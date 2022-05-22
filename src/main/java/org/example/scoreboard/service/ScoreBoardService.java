@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ScoreBoardService {
     @Getter
@@ -49,6 +48,6 @@ public class ScoreBoardService {
     public List<GameDto> getSummary() {
         Comparator<? super Game> scoreComparator = new ScoreComparator();
         GameConverter converter = new GameConverter();
-        return scoreBoard.values().stream().sorted(scoreComparator).map(converter).collect(Collectors.toList());
+        return scoreBoard.values().stream().sorted(scoreComparator).map(converter).toList();
     }
 }

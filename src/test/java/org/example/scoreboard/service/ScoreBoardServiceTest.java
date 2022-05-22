@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ScoreBoardServiceTest {
+class ScoreBoardServiceTest {
 
     private final ScoreBoardService unit = new ScoreBoardService();
 
@@ -16,7 +16,7 @@ public class ScoreBoardServiceTest {
     private static final String ENGLAND = "England";
 
     @Test
-    public void shouldStartGameWith2TeamsAndInitialScore() {
+    void shouldStartGameWith2TeamsAndInitialScore() {
         //when
         unit.startGame(FRANCE, ENGLAND);
         //then
@@ -29,13 +29,11 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void shouldFailToStartAGameOfTeamsAlreadyPlaying() {
+    void shouldFailToStartAGameOfTeamsAlreadyPlaying() {
         //when
         unit.startGame(FRANCE, ENGLAND);
         //then
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            unit.startGame(FRANCE, ENGLAND);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> unit.startGame(FRANCE, ENGLAND));
 
         String expectedMessage = "At least one of provided teams is already involved in a different game";
         String actualMessage = exception.getMessage();
@@ -45,12 +43,10 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void shouldFailToStartAGameOfTeamWithNullName() {
+    void shouldFailToStartAGameOfTeamWithNullName() {
         //when
         //then
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            unit.startGame(FRANCE, null);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> unit.startGame(FRANCE, null));
 
         String expectedMessage = "Team names can't be null or empty!";
         String actualMessage = exception.getMessage();
@@ -60,7 +56,7 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void shouldStartGameWith2TeamsAndUpdateScore() {
+    void shouldStartGameWith2TeamsAndUpdateScore() {
         //when
         unit.startGame(FRANCE, ENGLAND);
         unit.updateScore(FRANCE, ENGLAND, 1, 0);
@@ -74,13 +70,11 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void shouldFailToUpdateAGameScoreOfNotExistingGame() {
+    void shouldFailToUpdateAGameScoreOfNotExistingGame() {
         //when
         unit.startGame(FRANCE, ENGLAND);
         //then
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            unit.updateScore(FRANCE, "Brazil", 1, 0);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> unit.updateScore(FRANCE, "Brazil", 1, 0));
 
         String expectedMessage = "Game with provided teams is not in play";
         String actualMessage = exception.getMessage();
@@ -90,13 +84,11 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void shouldFailToUpdateAGameScoreWithNegativeValue() {
+    void shouldFailToUpdateAGameScoreWithNegativeValue() {
         //when
         unit.startGame(FRANCE, ENGLAND);
         //then
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            unit.updateScore(FRANCE, ENGLAND, -1, 0);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> unit.updateScore(FRANCE, ENGLAND, -1, 0));
 
         String expectedMessage = "Teams can't have a score below 0";
         String actualMessage = exception.getMessage();
@@ -106,7 +98,7 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void shouldStartGameAndFinishIt() {
+    void shouldStartGameAndFinishIt() {
         //when
         unit.startGame(FRANCE, ENGLAND);
         unit.finishGame(FRANCE, ENGLAND);
@@ -115,15 +107,13 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void shouldStartGameAndFailUpdatingAfterFinishingIt() {
+    void shouldStartGameAndFailUpdatingAfterFinishingIt() {
         //when
         unit.startGame(FRANCE, ENGLAND);
         unit.finishGame(FRANCE, ENGLAND);
 
         //then
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            unit.updateScore(FRANCE, ENGLAND, 1, 0);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> unit.updateScore(FRANCE, ENGLAND, 1, 0));
 
         String expectedMessage = "Game with provided teams is not in play";
         String actualMessage = exception.getMessage();
@@ -132,7 +122,7 @@ public class ScoreBoardServiceTest {
     }
 
     @Test
-    public void getSummaryOfAllStartedGames() throws InterruptedException {
+    void getSummaryOfAllStartedGames() throws InterruptedException {
         //when
         unit.startGame("Mexico", "Canada");
         //Code executes too fast after being optimized within JVM. Sleep is needed so the start times of games aren't set as equal
